@@ -16,6 +16,9 @@ import {
   NLayoutSider,
   NLayoutContent,
   NTreeSelect,
+  NDivider,
+  NDatePicker,
+  NInputNumber,
 } from 'naive-ui'
 
 import CommonPage from '@/components/page/CommonPage.vue'
@@ -49,7 +52,34 @@ const {
   handleAdd,
 } = useCRUD({
   name: '用户',
-  initForm: {},
+  initForm: {
+    // 猪场管理字段初始值
+    sow_number: null,
+    ear_tag: null,
+    pig_breed: null,
+    backfat_thickness: null,
+    parity: null,
+    gestation_days: null,
+    pen_number: null,
+    feed_intake: null,
+    feeder_number: null,
+    predicted_feed: null,
+    set_feed: null,
+    actual_feed: null,
+    start_time: null,
+    end_time: null,
+    set_feed_amount: null,
+    current_feed_amount: null,
+    last_feed_time: null,
+    control_switch: false,
+    feeder_status: null,
+    date: null,
+    feeding_status: null,
+    feeding_date: null,
+    is_normal: true,
+    last_set_time: null,
+    status: null
+  },
   doCreate: api.createUser,
   doUpdate: api.updateUser,
   doDelete: api.deleteUser,
@@ -486,6 +516,84 @@ const validateAddUser = {
                 clearable
                 default-expand-all
               ></NTreeSelect>
+            </NFormItem>
+            
+            <!-- 猪场管理信息 -->
+            <NDivider>猪场管理信息</NDivider>
+            <NFormItem label="母猪号" path="sow_number">
+              <NInput v-model:value="modalForm.sow_number" clearable placeholder="请输入母猪号" />
+            </NFormItem>
+            <NFormItem label="电子耳标号" path="ear_tag">
+              <NInput v-model:value="modalForm.ear_tag" clearable placeholder="请输入电子耳标号" />
+            </NFormItem>
+            <NFormItem label="猪种" path="pig_breed">
+              <NInput v-model:value="modalForm.pig_breed" clearable placeholder="请输入猪种" />
+            </NFormItem>
+            <NFormItem label="背膘厚度" path="backfat_thickness">
+              <NInputNumber v-model:value="modalForm.backfat_thickness" clearable placeholder="请输入背膘厚度" />
+            </NFormItem>
+            <NFormItem label="胎次" path="parity">
+              <NInputNumber v-model:value="modalForm.parity" clearable placeholder="请输入胎次" />
+            </NFormItem>
+            <NFormItem label="妊娠天数" path="gestation_days">
+              <NInputNumber v-model:value="modalForm.gestation_days" clearable placeholder="请输入妊娠天数" />
+            </NFormItem>
+            <NFormItem label="栏号" path="pen_number">
+              <NInput v-model:value="modalForm.pen_number" clearable placeholder="请输入栏号" />
+            </NFormItem>
+            <NFormItem label="采食量" path="feed_intake">
+              <NInputNumber v-model:value="modalForm.feed_intake" clearable placeholder="请输入采食量" />
+            </NFormItem>
+            <NFormItem label="下料器号" path="feeder_number">
+              <NInput v-model:value="modalForm.feeder_number" clearable placeholder="请输入下料器号" />
+            </NFormItem>
+            <NFormItem label="预测采食量" path="predicted_feed">
+              <NInputNumber v-model:value="modalForm.predicted_feed" clearable placeholder="请输入预测采食量" />
+            </NFormItem>
+            <NFormItem label="设置采食量" path="set_feed">
+              <NInputNumber v-model:value="modalForm.set_feed" clearable placeholder="请输入设置采食量" />
+            </NFormItem>
+            <NFormItem label="实际采食量" path="actual_feed">
+              <NInputNumber v-model:value="modalForm.actual_feed" clearable placeholder="请输入实际采食量" />
+            </NFormItem>
+            <NFormItem label="开始时间" path="start_time">
+              <NDatePicker v-model:value="modalForm.start_time" type="datetime" clearable />
+            </NFormItem>
+            <NFormItem label="结束时间" path="end_time">
+              <NDatePicker v-model:value="modalForm.end_time" type="datetime" clearable />
+            </NFormItem>
+            <NFormItem label="设置饲料量" path="set_feed_amount">
+              <NInputNumber v-model:value="modalForm.set_feed_amount" clearable placeholder="请输入设置饲料量" />
+            </NFormItem>
+            <NFormItem label="当前饲料量" path="current_feed_amount">
+              <NInputNumber v-model:value="modalForm.current_feed_amount" clearable placeholder="请输入当前饲料量" />
+            </NFormItem>
+            <NFormItem label="上次下料时间" path="last_feed_time">
+              <NDatePicker v-model:value="modalForm.last_feed_time" type="datetime" clearable />
+            </NFormItem>
+            <NFormItem label="控制开关" path="control_switch">
+              <NSwitch v-model:value="modalForm.control_switch" />
+            </NFormItem>
+            <NFormItem label="下料器状态" path="feeder_status">
+              <NInput v-model:value="modalForm.feeder_status" clearable placeholder="请输入下料器状态" />
+            </NFormItem>
+            <NFormItem label="日期" path="date">
+              <NDatePicker v-model:value="modalForm.date" type="date" clearable />
+            </NFormItem>
+            <NFormItem label="采食状态" path="feeding_status">
+              <NInput v-model:value="modalForm.feeding_status" clearable placeholder="请输入采食状态" />
+            </NFormItem>
+            <NFormItem label="采食日期" path="feeding_date">
+              <NDatePicker v-model:value="modalForm.feeding_date" type="date" clearable />
+            </NFormItem>
+            <NFormItem label="正常" path="is_normal">
+              <NSwitch v-model:value="modalForm.is_normal" />
+            </NFormItem>
+            <NFormItem label="上次设置时间" path="last_set_time">
+              <NDatePicker v-model:value="modalForm.last_set_time" type="datetime" clearable />
+            </NFormItem>
+            <NFormItem label="状态" path="status">
+              <NInput v-model:value="modalForm.status" clearable placeholder="请输入状态" />
             </NFormItem>
           </NForm>
         </CrudModal>

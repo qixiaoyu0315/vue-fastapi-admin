@@ -17,6 +17,33 @@ class User(BaseModel, TimestampMixin):
     last_login = fields.DatetimeField(null=True, description="最后登录时间", index=True)
     roles = fields.ManyToManyField("models.Role", related_name="user_roles")
     dept_id = fields.IntField(null=True, description="部门ID", index=True)
+    
+    # 猪场管理相关字段
+    sow_number = fields.CharField(max_length=50, null=True, description="母猪号")
+    ear_tag = fields.CharField(max_length=50, null=True, description="电子耳标号")
+    pig_breed = fields.CharField(max_length=50, null=True, description="猪种")
+    backfat_thickness = fields.FloatField(null=True, description="背膘厚度")
+    parity = fields.IntField(null=True, description="胎次")
+    gestation_days = fields.IntField(null=True, description="妊娠天数")
+    pen_number = fields.CharField(max_length=50, null=True, description="栏号")
+    feed_intake = fields.FloatField(null=True, description="采食量")
+    feeder_number = fields.CharField(max_length=50, null=True, description="下料器号")
+    predicted_feed = fields.FloatField(null=True, description="预测采食量")
+    set_feed = fields.FloatField(null=True, description="设置采食量")
+    actual_feed = fields.FloatField(null=True, description="实际采食量")
+    start_time = fields.DatetimeField(null=True, description="开始时间")
+    end_time = fields.DatetimeField(null=True, description="结束时间")
+    set_feed_amount = fields.FloatField(null=True, description="设置饲料量")
+    current_feed_amount = fields.FloatField(null=True, description="当前饲料量")
+    last_feed_time = fields.DatetimeField(null=True, description="上次下料时间")
+    control_switch = fields.BooleanField(null=True, description="控制开关")
+    feeder_status = fields.CharField(max_length=20, null=True, description="下料器状态")
+    date = fields.DateField(null=True, description="日期")
+    feeding_status = fields.CharField(max_length=20, null=True, description="采食状态")
+    feeding_date = fields.DateField(null=True, description="采食日期")
+    is_normal = fields.BooleanField(null=True, description="正常")
+    last_set_time = fields.DatetimeField(null=True, description="上次设置时间")
+    status = fields.CharField(max_length=20, null=True, description="状态")
 
     class Meta:
         table = "user"
