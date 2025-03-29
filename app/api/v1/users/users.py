@@ -20,6 +20,14 @@ async def list_user(
     username: str = Query("", description="用户名称，用于搜索"),
     email: str = Query("", description="邮箱地址"),
     dept_id: int = Query(None, description="部门ID"),
+    # 猪场管理相关字段
+    sow_number: str = Query("", description="母猪号"),
+    ear_tag: str = Query("", description="电子耳标号"),
+    pen_number: str = Query("", description="栏号"),
+    feeder_number: str = Query("", description="下料器号"),
+    pig_breed: str = Query("", description="猪种"),
+    feeding_status: str = Query("", description="采食状态"),
+    feeder_status: str = Query("", description="下料器状态"),
 ):
     q = Q()
     if username:
@@ -28,6 +36,22 @@ async def list_user(
         q &= Q(email__contains=email)
     if dept_id is not None:
         q &= Q(dept_id=dept_id)
+    # 添加猪场管理相关字段的搜索条件
+    if sow_number:
+        q &= Q(sow_number__contains=sow_number)
+    if ear_tag:
+        q &= Q(ear_tag__contains=ear_tag)
+    if pen_number:
+        q &= Q(pen_number__contains=pen_number)
+    if feeder_number:
+        q &= Q(feeder_number__contains=feeder_number)
+    if pig_breed:
+        q &= Q(pig_breed__contains=pig_breed)
+    if feeding_status:
+        q &= Q(feeding_status__contains=feeding_status)
+    if feeder_status:
+        q &= Q(feeder_status__contains=feeder_status)
+    
     total, user_objs = await user_controller.list(page=page, page_size=page_size, search=q)
     data = [await obj.to_dict(m2m=True, exclude_fields=["password"]) for obj in user_objs]
     for item in data:

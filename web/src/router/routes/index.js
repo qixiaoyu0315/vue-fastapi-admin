@@ -28,6 +28,24 @@ export const basicRoutes = [
     meta: { order: 1 },
   },
   {
+    name: '猪场管理',
+    path: '/pig-management',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/system/user/pig_management.vue'),
+        name: '猪场管理页面',
+        meta: {
+          title: '猪场管理',
+          icon: 'mdi:pig',
+          affix: true,
+        },
+      },
+    ],
+    meta: { order: 2 },
+  },
+  {
     name: t('views.profile.label_profile'),
     path: '/profile',
     component: Layout,
